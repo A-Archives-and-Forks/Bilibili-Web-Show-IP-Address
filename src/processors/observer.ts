@@ -2,7 +2,7 @@ import type { ReplyElement, SubReplyElement } from '@/types/reply'
 import { isElementLoaded } from '@/utils/helper'
 import { getLocationString } from '@/utils/location'
 
-const getLocationFromReply = (replyItemEl: HTMLDivElement) => {
+const extractLocationFromReplyElement = (replyItemEl: HTMLDivElement) => {
     let replyElement: SubReplyElement | ReplyElement
     let locationString: string | undefined
     if (replyItemEl.className.startsWith('sub')) {
@@ -15,15 +15,19 @@ const getLocationFromReply = (replyItemEl: HTMLDivElement) => {
     return locationString
 }
 
+const hasLocationInjected = (replyInfo: Element) =>
+    replyInfo.children.length !== 0 && replyInfo.children[0].innerHTML.includes('IP属地')
+
 const insertLocation = (replyItemEl: HTMLDivElement) => {
     const replyInfo = replyItemEl.className.startsWith('sub')
         ? replyItemEl.querySelector('.sub-reply-info')
         : replyItemEl.querySelector('.reply-info')
     if (!replyInfo) throw new Error('Can not detect reply info')
-    const locationString = getLocationFromReply(replyItemEl)
-    if (locationString && replyInfo.children.length !== 0 && !replyInfo.children[0].innerHTML.includes('IP属地')) {
-        replyInfo.children[0].innerHTML += `&nbsp;&nbsp;${locationString}`
-    }
+
+    const locationString = extractLocationFromReplyElement(replyItemEl)
+    if (!locationString || hasLocationInjected(replyInfo)) return
+
+    replyInfo.children[0].innerHTML += `&nbsp;&nbsp;${locationString}`
 }
 
 const isReplyItem = (el: Node): el is HTMLDivElement =>
@@ -47,23 +51,4 @@ export const observeAndInjectComments = async (root?: HTMLElement) => {
         }
     })
     observer.observe(targetNode, { childList: true, subtree: true })
-}
-
-export const serveNewComments = async (itemSelector: string, root: HTMLElement | Document | Element = document) => {
-    const dynList = await isElementLoaded(itemSelector, root)
-    let lastObserved: HTMLElement
-    const observer = new MutationObserver((mutationsList) => {
-        for (const mutation of mutationsList) {
-            if (
-                mutation.type !== 'childList' ||
-                !(mutation.target instanceof HTMLElement) ||
-                !mutation.target.classList.contains('bili-comment-container') ||
-                mutation.target === lastObserved
-            )
-                continue
-            observeAndInjectComments(mutation.target)
-            lastObserved = mutation.target
-        }
-    })
-    observer.observe(dynList, { childList: true, subtree: true })
 }

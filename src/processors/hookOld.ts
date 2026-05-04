@@ -8,7 +8,7 @@ interface InjectorOption {
     blackroom: boolean
 }
 
-const injectBBComment = async (bbComment: bbComment, { blackroom }: InjectorOption = { blackroom: false }) => {
+const injectBBComment = (bbComment: bbComment, { blackroom }: InjectorOption = { blackroom: false }) => {
     const { _createListCon: createListCon, _createSubReplyItem: createSubReplyItem } = bbComment.prototype
     const applyHandler = <T extends HooksFunc>(target: T, thisArg: bbComment, args: Parameters<T>) => {
         const [item] = args
@@ -33,7 +33,7 @@ const injectBBComment = async (bbComment: bbComment, { blackroom }: InjectorOpti
     })
 }
 
-export const hookBBComment = async ({ blackroom }: InjectorOption = { blackroom: false }) => {
+export const hookBBComment = ({ blackroom }: InjectorOption = { blackroom: false }) => {
     if (unsafeWindow.bbComment) {
         injectBBComment(unsafeWindow.bbComment, { blackroom })
         return

@@ -90,10 +90,8 @@ router.serve(
     'https://t.bilibili.com/',
     async () => {
         const dynHome = await isElementLoaded('.bili-dyn-home--member')
-        const isNewDyn = (() => {
-            const dynBtnText = (dynHome.querySelector('.bili-dyn-sidebar__btn') as HTMLElement | undefined)?.textContent
-            return dynBtnText ? dynBtnText.includes('新版反馈') || dynBtnText.includes('回到旧版') : false
-        })()
+        const dynBtnText = (dynHome.querySelector('.bili-dyn-sidebar__btn') as HTMLElement | undefined)?.textContent
+        const isNewDyn = dynBtnText ? dynBtnText.includes('新版反馈') || dynBtnText.includes('回到旧版') : false
         if (isNewDyn) {
             hookLit()
         } else {

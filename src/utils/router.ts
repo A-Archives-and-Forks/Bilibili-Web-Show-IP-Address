@@ -1,5 +1,3 @@
-import { patch } from './patch'
-
 type RouteAction = (url: string) => void | Promise<void>
 
 interface RouteConstrait {
@@ -28,7 +26,6 @@ export class Router {
         for (const { prefix, action, constrait } of this.routes) {
             if (!url.startsWith(prefix)) continue
             if (constrait.endsWith && !url.endsWith(constrait.endsWith)) continue
-            patch()
             action(url)
             break
         }
