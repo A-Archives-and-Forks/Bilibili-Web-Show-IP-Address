@@ -5,11 +5,14 @@
 
 ### ⚠ BREAKING CHANGES
 
-* 内置 hook vue3 app，目前仅一个场景用到
+* 将外部依赖 Hook Vue3 App 转为内置 ([0e435bc](https://github.com/maxchang3/BiliReveal/commit/0e435bc7338088934e74baeb5c2b8f74b9a51008))
+  * 解决了因网络无法访问 Greasy Fork 导致脚本整体无法运行的问题。
+  * 目前仅活动页（拜年祭）需要该依赖
+ 
 
 ### Features
 
-* 添加端到端测试 ([8eb6cca](https://github.com/maxchang3/BiliReveal/commit/8eb6ccae4649ba723ae4f19dc989a11c804bf912))
+* 端到端测试全覆盖 ([8eb6cca](https://github.com/maxchang3/BiliReveal/commit/8eb6ccae4649ba723ae4f19dc989a11c804bf912))
 
 
 ### Code Refactoring
