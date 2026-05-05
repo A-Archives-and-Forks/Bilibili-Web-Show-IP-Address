@@ -21,5 +21,6 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.biome": "explicit",
     "source.organizeImports.biome": "explicit"
-  }
+  },
+  "js/ts.tsdk.path": "./node_modules/typescript/lib"
 }
