@@ -1,0 +1,20 @@
+import { VueLegacyAdapter } from './adapters'
+import { defineTestSuite } from './utils'
+
+defineTestSuite('Vue Legacy', (page) => new VueLegacyAdapter(page), [
+    {
+        name: '小黑屋',
+        url: 'https://www.bilibili.com/blackroom/ban/262773',
+    },
+    {
+        name: '活动话题页',
+        url: 'https://www.bilibili.com/blackboard/feed-topic.html?topic_id=1332080&sort_by=2',
+        setup: (page) => {
+            const commentWithCount = page
+                .locator('.bili-dyn-action.comment')
+                .filter({ hasText: /^\s*\d+\s*$/ })
+                .first()
+            commentWithCount.click()
+        },
+    },
+])
