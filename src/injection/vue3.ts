@@ -1,6 +1,7 @@
-import type { ReplyElement, SubReplyElement } from '@/types/reply'
-import { isElementLoaded } from '@/utils/helper'
+import { isElementLoaded } from '@/utils/dom'
 import { getLocationString } from '@/utils/location'
+import { hookVue3App } from './shims/hook-vue3-app'
+import type { ReplyElement, SubReplyElement } from './types'
 
 const extractLocationFromReplyElement = (replyItemEl: HTMLDivElement) => {
     let replyElement: SubReplyElement | ReplyElement
@@ -34,6 +35,7 @@ const isReplyItem = (el: Node): el is HTMLDivElement =>
     el instanceof HTMLDivElement && ['reply-item', 'sub-reply-item'].includes(el.className)
 
 export const observeAndInjectComments = async (root?: HTMLElement) => {
+    hookVue3App()
     const targetNode = await isElementLoaded('.reply-list', root)
     const observer = new MutationObserver((mutationsList) => {
         for (const mutation of mutationsList) {

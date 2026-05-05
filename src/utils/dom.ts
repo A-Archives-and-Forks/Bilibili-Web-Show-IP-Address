@@ -9,7 +9,8 @@ export const isElementLoaded = async (selector: string, root: HTMLElement | Docu
             resolve(element)
             observer.disconnect()
         })
-        observer.observe(root === document ? root.documentElement : root, {
+        const target = root === document ? (root.documentElement ?? root) : root
+        observer.observe(target, {
             childList: true,
             subtree: true,
         })

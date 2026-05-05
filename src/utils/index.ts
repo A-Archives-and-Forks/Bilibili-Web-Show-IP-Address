@@ -1,5 +1,3 @@
-export * from './config'
-export * from './helper'
-export * from './hookVue3App'
+export * from './dom'
 export * from './location'
 export * from './router'

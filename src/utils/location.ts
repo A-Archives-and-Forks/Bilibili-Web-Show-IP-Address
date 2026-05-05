@@ -1,25 +1,5 @@
-import type { Reply } from '@/types/reply'
-import { GM_getValue } from '$'
-
-export const REPLACEMENTS_KEY = 'locationReplacements'
-
-type ReplacementMap = Map<string, string>
-
-const safeJSONParse = <T>(text: string, defaultValue: T): T => {
-    try {
-        return JSON.parse(text) as T
-    } catch {
-        return defaultValue
-    }
-}
-
-export const parseReplacements = (rawJson?: string): ReplacementMap => {
-    const json = rawJson || GM_getValue(REPLACEMENTS_KEY, '{}')
-    const parsed = safeJSONParse<Record<string, string>>(json, {})
-    return new Map(Object.entries(parsed))
-}
-
-export const replacements = (__LITE_VERSION__ ? undefined : parseReplacements())!
+import { replacements } from '@/config/location-replacements'
+import type { Reply } from '@/injection/types'
 
 const preprocessLocation = (location?: string): string | undefined => {
     if (!location || replacements.size === 0) return location

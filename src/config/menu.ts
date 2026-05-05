@@ -1,5 +1,5 @@
 import { GM, GM_registerMenuCommand } from '$'
-import { REPLACEMENTS_KEY, replacements } from './location'
+import { REPLACEMENTS_KEY, replacements } from './location-replacements'
 
 const fromError = (error: unknown): string => (error instanceof Error ? error.message : String(error))
 
