@@ -2,7 +2,7 @@ import { expect } from '@playwright/test'
 import { LitComponentAdapter } from './adapters'
 import { defineTestSuite } from './utils'
 
-defineTestSuite('Lit Component', (page) => new LitComponentAdapter(page), [
+defineTestSuite('Lit Component', LitComponentAdapter, [
     { name: '视频', url: 'https://www.bilibili.com/video/BV1tx411w7Ay' },
     { name: '新列表', url: 'https://www.bilibili.com/list/8047632' },
     { name: '新版单独动态页', url: 'https://www.bilibili.com/opus/1108038404888592390' },

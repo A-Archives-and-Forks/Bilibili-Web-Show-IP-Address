@@ -1,7 +1,7 @@
 import { VueLegacyAdapter } from './adapters'
 import { defineTestSuite } from './utils'
 
-defineTestSuite('Vue Legacy', (page) => new VueLegacyAdapter(page), [
+defineTestSuite('Vue Legacy', VueLegacyAdapter, [
     {
         name: '小黑屋',
         url: 'https://www.bilibili.com/blackroom/ban/262773',

@@ -13,11 +13,7 @@ interface TestCase {
     verify?: (page: Page) => Promise<void> | void
 }
 
-export function defineTestSuite(
-    suiteName: string,
-    createAdapter: (page: Page) => BiliCommentAdapter,
-    cases: TestCase[]
-) {
+export function defineTestSuite(suiteName: string, Adapter: new (page: Page) => BiliCommentAdapter, cases: TestCase[]) {
     test.describe(suiteName, () => {
         test.beforeEach(async ({ context, page }) => {
             await setupTestEnv(page, context)
@@ -30,7 +26,7 @@ export function defineTestSuite(
 
         for (const { name, url, setup, verify } of cases) {
             test(name, async ({ page }) => {
-                const adapter = createAdapter(page)
+                const adapter = new Adapter(page)
                 await page.goto(url)
 
                 if (setup) {
