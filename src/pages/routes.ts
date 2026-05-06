@@ -11,7 +11,7 @@ export const registerRoutes = (router: Router) => {
             /** 新番剧播放页 */ 'https://www.bilibili.com/bangumi/play/',
             /** 课程页 */ 'https://www.bilibili.com/cheese/play/',
             /** 话题页 */ 'https://www.bilibili.com/v/topic/detail',
-            /** 漫画详情页（无 IP 属地数据） */ 'https://manga.bilibili.com/detail/',
+            /** 漫画详情页（漫画 APP 端的评论无 IP 属地数据） */ 'https://manga.bilibili.com/detail/',
             /** 节日（如：拜年祭） */ 'https://www.bilibili.com/festival/',
         ],
         hookLit
