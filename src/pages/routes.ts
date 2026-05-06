@@ -7,7 +7,7 @@ export const registerRoutes = (router: Router) => {
         [
             /** 视频 */ 'https://www.bilibili.com/video/',
             /** 新列表 */ 'https://www.bilibili.com/list/',
-            /** 新版单独动态页 */ 'https://www.bilibili.com/opus/',
+            /** 新版单独动态页、专栏页 */ 'https://www.bilibili.com/opus/',
             /** 新番剧播放页 */ 'https://www.bilibili.com/bangumi/play/',
             /** 课程页 */ 'https://www.bilibili.com/cheese/play/',
             /** 话题页 */ 'https://www.bilibili.com/v/topic/detail',
@@ -44,7 +44,7 @@ export const registerRoutes = (router: Router) => {
     router.serve('https://t.bilibili.com/', handleDynamicHomeRoute, { endsWith: '/' })
 
     /**
-     * 单独动态页
+     * 旧版单独动态页
      */
     router.serve('https://t.bilibili.com/', handleDynamicItemRoute)
 

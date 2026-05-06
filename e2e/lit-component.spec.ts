@@ -5,7 +5,7 @@ import { defineTestSuite } from './utils'
 defineTestSuite('Lit Component', LitComponentAdapter, [
     { name: '视频', url: 'https://www.bilibili.com/video/BV1tx411w7Ay' },
     { name: '新列表', url: 'https://www.bilibili.com/list/8047632' },
-    { name: '新版单独动态页', url: 'https://www.bilibili.com/opus/1108038404888592390' },
+    { name: '新版单独动态页、专栏页', url: 'https://www.bilibili.com/opus/1108038404888592390' },
     { name: '新番剧播放页', url: 'https://www.bilibili.com/bangumi/play/ss29325' },
     {
         name: '课程页',
@@ -56,5 +56,5 @@ defineTestSuite('Lit Component', LitComponentAdapter, [
             commentWithCount.click()
         },
     },
-    { name: '单独动态页', url: 'https://t.bilibili.com/385190177693666264' },
+    { name: '旧版单独动态页', url: 'https://t.bilibili.com/385190177693666264' },
 ])
