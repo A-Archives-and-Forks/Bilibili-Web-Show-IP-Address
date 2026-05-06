@@ -7,6 +7,10 @@ defineTestSuite('Vue Legacy', VueLegacyAdapter, [
         url: 'https://www.bilibili.com/blackroom/ban/262773',
     },
     {
+        name: '活动页（旧活动）',
+        url: 'https://www.bilibili.com/blackboard/activity-xinxinghj.html',
+    },
+    {
         name: '活动话题页',
         url: 'https://www.bilibili.com/blackboard/feed-topic.html?topic_id=1332080&sort_by=2',
         setup: (page) => {

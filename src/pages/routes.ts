@@ -20,6 +20,9 @@ export const registerRoutes = (router: Router) => {
     router.serve(/** 活动话题页 */ 'https://www.bilibili.com/blackboard/feed-topic.html', () => hookBBComment())
 
     router.serve(/** 活动页 */ 'https://www.bilibili.com/blackboard/', () => {
+        // 部分旧活动用的还是老的评论组件
+        hookBBComment({ variation: true })
+        // 最近的都是 Vue 3 的了
         observeAndInjectComments()
     })
 
@@ -48,5 +51,5 @@ export const registerRoutes = (router: Router) => {
     /**
      * 小黑屋
      */
-    router.serve('https://www.bilibili.com/blackroom/ban/', () => hookBBComment({ blackroom: true }))
+    router.serve('https://www.bilibili.com/blackroom/ban/', () => hookBBComment({ variation: true }))
 }

@@ -5,10 +5,10 @@ import type { bbComment, CreateListCon, CreateSubReplyItem } from './types'
 type HooksFunc = CreateListCon | CreateSubReplyItem
 
 interface InjectorOption {
-    blackroom: boolean
+    variation: boolean
 }
 
-const injectBBComment = (bbComment: bbComment, { blackroom }: InjectorOption = { blackroom: false }) => {
+const injectBBComment = (bbComment: bbComment, { variation }: InjectorOption = { variation: false }) => {
     const { _createListCon: createListCon, _createSubReplyItem: createSubReplyItem } = bbComment.prototype
     const applyHandler = <T extends HooksFunc>(target: T, thisArg: bbComment, args: Parameters<T>) => {
         const [item] = args
@@ -16,9 +16,9 @@ const injectBBComment = (bbComment: bbComment, { blackroom }: InjectorOption = {
         const replyTimeRegex = /<span class="reply-time">(.*?)<\/span>/
         const location = getLocationString(item)
         if (!location) return result
-        if (blackroom) {
-            const blackroomRegex = /<span class="time">(.*?)<\/span>/
-            return result.replace(blackroomRegex, `<span class="time">$1&nbsp;&nbsp;${location}</span>`)
+        if (variation) {
+            const variationRegex = /<span class="time">(.*?)<\/span>/
+            return result.replace(variationRegex, `<span class="time">$1&nbsp;&nbsp;${location}</span>`)
         }
         return result.replace(
             replyTimeRegex,
@@ -33,9 +33,9 @@ const injectBBComment = (bbComment: bbComment, { blackroom }: InjectorOption = {
     })
 }
 
-export const hookBBComment = ({ blackroom }: InjectorOption = { blackroom: false }) => {
+export const hookBBComment = ({ variation }: InjectorOption = { variation: false }) => {
     if (unsafeWindow.bbComment) {
-        injectBBComment(unsafeWindow.bbComment, { blackroom })
+        injectBBComment(unsafeWindow.bbComment, { variation })
         return
     }
     let bbComment: bbComment | undefined
@@ -43,7 +43,7 @@ export const hookBBComment = ({ blackroom }: InjectorOption = { blackroom: false
         get: (): bbComment | undefined => bbComment,
         set: (value: bbComment) => {
             bbComment = value
-            injectBBComment(value, { blackroom })
+            injectBBComment(value, { variation })
         },
         configurable: true,
     })
