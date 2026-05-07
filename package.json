@@ -1,8 +1,8 @@
 {
   "name": "bilireveal",
-  "type": "module",
   "version": "2.0.1",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vp dev",
     "build": "vp run build:normal && vp run build:firemonkey",
