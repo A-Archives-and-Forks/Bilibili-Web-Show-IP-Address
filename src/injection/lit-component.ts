@@ -3,66 +3,70 @@ import { unsafeWindow } from '$'
 import type { Reply } from './types'
 
 interface ActionButtonsRender extends HTMLElement {
-    data: Reply
-    update(): void
+  data: Reply
+  update(): void
 }
 
 interface Constructor<T> {
-    new (...args: any[]): T
-    readonly prototype: T
+  new (...args: any[]): T
+  readonly prototype: T
 }
 
 const updateLocationElement = (thisArg: ActionButtonsRender) => {
-    const pubDateEl = thisArg.shadowRoot!.querySelector<HTMLDivElement>('#pubdate')
-    if (!pubDateEl) return
+  const pubDateEl = thisArg.shadowRoot!.querySelector<HTMLDivElement>('#pubdate')
+  if (!pubDateEl) return
 
-    let locationEl = thisArg.shadowRoot!.querySelector<HTMLDivElement>('#location')
-    const locationString = getLocationString(thisArg.data)
+  let locationEl = thisArg.shadowRoot!.querySelector<HTMLDivElement>('#location')
+  const locationString = getLocationString(thisArg.data)
 
-    if (!locationString) {
-        if (locationEl) locationEl.remove()
-        return
-    }
+  if (!locationString) {
+    if (locationEl) locationEl.remove()
+    return
+  }
 
-    if (locationEl) {
-        locationEl.textContent = locationString
-        return
-    }
-
-    locationEl = document.createElement('div')
-    locationEl.id = 'location'
+  if (locationEl) {
     locationEl.textContent = locationString
-    pubDateEl.insertAdjacentElement('afterend', locationEl)
+    return
+  }
+
+  locationEl = document.createElement('div')
+  locationEl.id = 'location'
+  locationEl.textContent = locationString
+  pubDateEl.insertAdjacentElement('afterend', locationEl)
 }
 
 const createPatch = (ActionButtonsRender: Constructor<ActionButtonsRender>) => {
-    const applyHandler = <T extends (typeof ActionButtonsRender.prototype)['update']>(
-        target: T,
-        thisArg: ActionButtonsRender,
-        args: Parameters<T>
-    ) => {
-        const result = Reflect.apply(target, thisArg, args)
-        updateLocationElement(thisArg)
-        return result
-    }
-    ActionButtonsRender.prototype.update = new Proxy(ActionButtonsRender.prototype.update, { apply: applyHandler })
-    return ActionButtonsRender
+  const applyHandler = <T extends (typeof ActionButtonsRender.prototype)['update']>(
+    target: T,
+    thisArg: ActionButtonsRender,
+    args: Parameters<T>,
+  ) => {
+    const result = Reflect.apply(target, thisArg, args)
+    updateLocationElement(thisArg)
+    return result
+  }
+  ActionButtonsRender.prototype.update = new Proxy(ActionButtonsRender.prototype.update, {
+    apply: applyHandler,
+  })
+  return ActionButtonsRender
 }
 
 export const hookLit = () => {
-    const { define: originalDefine } = unsafeWindow.customElements
-    const applyHandler = <T extends typeof originalDefine>(
-        target: T,
-        thisArg: ActionButtonsRender,
-        args: Parameters<T>
-    ) => {
-        const [name, classConstructor, ...rest] = args
-        if (typeof classConstructor !== 'function' || name !== 'bili-comment-action-buttons-renderer')
-            return Reflect.apply(target, thisArg, args)
-        const PatchActionButtonsRender = createPatch(classConstructor as Constructor<ActionButtonsRender>)
-        return Reflect.apply(target, thisArg, [name, PatchActionButtonsRender, ...rest])
-    }
-    unsafeWindow.customElements.define = new Proxy(originalDefine, {
-        apply: applyHandler,
-    })
+  const { define: originalDefine } = unsafeWindow.customElements
+  const applyHandler = <T extends typeof originalDefine>(
+    target: T,
+    thisArg: ActionButtonsRender,
+    args: Parameters<T>,
+  ) => {
+    const [name, classConstructor, ...rest] = args
+    if (typeof classConstructor !== 'function' || name !== 'bili-comment-action-buttons-renderer')
+      return Reflect.apply(target, thisArg, args)
+    const PatchActionButtonsRender = createPatch(
+      classConstructor as Constructor<ActionButtonsRender>,
+    )
+    return Reflect.apply(target, thisArg, [name, PatchActionButtonsRender, ...rest])
+  }
+  unsafeWindow.customElements.define = new Proxy(originalDefine, {
+    apply: applyHandler,
+  })
 }

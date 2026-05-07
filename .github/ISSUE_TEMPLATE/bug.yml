@@ -1,7 +1,7 @@
 name: 问题反馈
 description: 反馈出现的问题
 title: '[BUG]: '
-labels: ["bug"]
+labels: ['bug']
 body:
   - type: checkboxes
     id: precheck

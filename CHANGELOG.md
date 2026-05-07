@@ -9,248 +9,244 @@
 
 ## [2.0.0](https://github.com/maxchang3/BiliReveal/compare/v1.6.12...v2.0.0) (2026-05-05)
 
-
 ### ⚠ BREAKING CHANGES
 
-* 将外部依赖 Hook Vue3 App 转为内置 ([0e435bc](https://github.com/maxchang3/BiliReveal/commit/0e435bc7338088934e74baeb5c2b8f74b9a51008))
-  * 解决了因网络无法访问 Greasy Fork 导致脚本整体无法运行的问题。
-  * 目前仅活动页（拜年祭）需要该依赖
- 
+- 将外部依赖 Hook Vue3 App 转为内置 ([0e435bc](https://github.com/maxchang3/BiliReveal/commit/0e435bc7338088934e74baeb5c2b8f74b9a51008))
+  - 解决了因网络无法访问 Greasy Fork 导致脚本整体无法运行的问题。
+  - 目前仅活动页（拜年祭）需要该依赖
 
 ### Features
 
-* 端到端测试全覆盖 ([8eb6cca](https://github.com/maxchang3/BiliReveal/commit/8eb6ccae4649ba723ae4f19dc989a11c804bf912))
-
+- 端到端测试全覆盖 ([8eb6cca](https://github.com/maxchang3/BiliReveal/commit/8eb6ccae4649ba723ae4f19dc989a11c804bf912))
 
 ### Code Refactoring
 
-* 内置 hook vue3 app，目前仅一个场景用到 ([0e435bc](https://github.com/maxchang3/BiliReveal/commit/0e435bc7338088934e74baeb5c2b8f74b9a51008))
+- 内置 hook vue3 app，目前仅一个场景用到 ([0e435bc](https://github.com/maxchang3/BiliReveal/commit/0e435bc7338088934e74baeb5c2b8f74b9a51008))
 
 ## [1.6.12](https://github.com/maxchang3/BiliReveal/compare/v1.6.11...v1.6.12) (2026-04-01)
 
-
 ### Bug Fixes
 
-* **hookBBComment:** 优化属地获取 ([343e39f](https://github.com/maxchang3/BiliReveal/commit/343e39f05e918a7f16153b3cd767d941ba6faf40))
-* 修复专栏评论区适配（使用 Lit 策略） ([9fcc2e3](https://github.com/maxchang3/BiliReveal/commit/9fcc2e3eb104aa44baae0af22c9fd30bac5d352a))
-* 拆分活动话题页逻辑（目前仍使用旧版评论区） ([1d7e59a](https://github.com/maxchang3/BiliReveal/commit/1d7e59adb712e194f4d93acfef2f5034fad165b6))
+- **hookBBComment:** 优化属地获取 ([343e39f](https://github.com/maxchang3/BiliReveal/commit/343e39f05e918a7f16153b3cd767d941ba6faf40))
+- 修复专栏评论区适配（使用 Lit 策略） ([9fcc2e3](https://github.com/maxchang3/BiliReveal/commit/9fcc2e3eb104aa44baae0af22c9fd30bac5d352a))
+- 拆分活动话题页逻辑（目前仍使用旧版评论区） ([1d7e59a](https://github.com/maxchang3/BiliReveal/commit/1d7e59adb712e194f4d93acfef2f5034fad165b6))
 
 ## v1.6.11
 
 ### 修复
 
-* 修复旧版动态下的评论区显示，旧版评论区现在也用上了新的 Lit 评论组件.
+- 修复旧版动态下的评论区显示，旧版评论区现在也用上了新的 Lit 评论组件.
 
 ## v1.6.10
 
 ### 修复
 
-* 修复节日页面（如拜年祭）中 IP 属地信息显示异常的问题，节日页面现在也使用 Lit 评论组件。
-  
+- 修复节日页面（如拜年祭）中 IP 属地信息显示异常的问题，节日页面现在也使用 Lit 评论组件。
+
 ## v1.6.9
 
 ### 功能
 
-* 新增 IP 属地文本替换功能，支持自定义替换规则。
+- 新增 IP 属地文本替换功能，支持自定义替换规则。
 
 ## v1.6.8
 
 ### 适配
 
-* 支持话题页评论区。
+- 支持话题页评论区。
 
 ## v1.6.7
 
 ### 修复
 
-* 修复使用 AdGuard 作为脚本管理器在 Safari 下当网络缓慢时导致 Hook Lit 逻辑失效的问题。
+- 修复使用 AdGuard 作为脚本管理器在 Safari 下当网络缓慢时导致 Hook Lit 逻辑失效的问题。
 
 ## v1.6.6
 
 ### 适配
 
-* 适配活动页（blackboard），如：「拜年祭预约页面」。
+- 适配活动页（blackboard），如：「拜年祭预约页面」。
 
 ## v1.6.5
 
 ### 适配
 
-* 适配新版个人主页动态页（fresh space）。
+- 适配新版个人主页动态页（fresh space）。
 
 ## v1.6.4
 
 ### 修复
 
-* 匹配 URL 时去除查询参数和哈希值。[#101](https://github.com/maxchang3/Bilibili-Web-Show-IP-Location/issues/101)
+- 匹配 URL 时去除查询参数和哈希值。[#101](https://github.com/maxchang3/Bilibili-Web-Show-IP-Location/issues/101)
 
 ## v.1.6.3
 
 ### 适配
 
-* 适配番剧（影视）页面更新。
+- 适配番剧（影视）页面更新。
 
 ## v1.6.2
 
 ### 适配
 
-* 适配漫画详情页。
+- 适配漫画详情页。
 
 ## v1.6.0
 
 ### 优化
 
-* 新版评论系统（基于 Lit）：当 IP 属地不存在时，移除相应元素。
-* 专栏：在插入 IP 属地信息前，先检查是否已存在。
+- 新版评论系统（基于 Lit）：当 IP 属地不存在时，移除相应元素。
+- 专栏：在插入 IP 属地信息前，先检查是否已存在。
 
 ## v1.5.9
 
 ### 适配
 
-* 适配基于 Lit 的新版评论系统、删除临时版本。
+- 适配基于 Lit 的新版评论系统、删除临时版本。
 
 ## v1.5.18
 
 ### 适配
 
-* 针对单独动态页的元素结构调整。
+- 针对单独动态页的元素结构调整。
 
 ### 优化
 
-* 新版评论区：在插入 IP 属地信息前，检查是否已存在或已插入相关信息。
+- 新版评论区：在插入 IP 属地信息前，检查是否已存在或已插入相关信息。
 
 ## v1.5.17
 
 ### 修复
 
-* 初始化 `_INITIAL_STATE__` 值，修复 Hook 顺序错误导致的页面加载异常。
+- 初始化 `_INITIAL_STATE__` 值，修复 Hook 顺序错误导致的页面加载异常。
 
 ## v1.5.16
 
 ### 临时
 
-* 强制恢复评论区为 `comment-pc-vue.next.js` 版本。
+- 强制恢复评论区为 `comment-pc-vue.next.js` 版本。
 
 ## v1.5.12
 
 ### 修复
 
-* 修复在切换动态页的 UP 主名称时，无法获取 IP 属地的问题。
+- 修复在切换动态页的 UP 主名称时，无法获取 IP 属地的问题。
 
 ## v1.5.10
 
 ### 适配
 
-* 文章页评论区功能。
-* 专栏作者 IP 属地显示。
+- 文章页评论区功能。
+- 专栏作者 IP 属地显示。
 
 ## v1.5.9
 
 ### 适配
 
-* 小黑屋功能。
+- 小黑屋功能。
 
 ## v1.5.8
 
 ### 适配
 
-* `pc-comment-vue.next.js`：基于 Hook Vue3 应用，将 `__vue__` 暴露到元素以恢复原有逻辑。
+- `pc-comment-vue.next.js`：基于 Hook Vue3 应用，将 `__vue__` 暴露到元素以恢复原有逻辑。
 
 ### 优化
 
-* 重写旧版评论的 Hook 逻辑，参考其他脚本。
-* 对旧版评论系统，直接创建相关元素（如 `.reply-location`），以适配已有样式。
-* 避免 IP 属地信息混淆：当接口不存在或无法获取 IP 属地时，不再显示「IP 属地：未知」。
+- 重写旧版评论的 Hook 逻辑，参考其他脚本。
+- 对旧版评论系统，直接创建相关元素（如 `.reply-location`），以适配已有样式。
+- 避免 IP 属地信息混淆：当接口不存在或无法获取 IP 属地时，不再显示「IP 属地：未知」。
 
 ## v1.5.7
 
 ### 适配
 
-* 适配拜年祭页面。
+- 适配拜年祭页面。
 
 ### 临时
 
-* 临时适配 `pc-comment-vue.next.js`。
+- 临时适配 `pc-comment-vue.next.js`。
 
 ## v1.5.5
 
 ### 适配
 
-* 动态主页更新。
-* 话题页面。
+- 动态主页更新。
+- 话题页面。
 
 ## v1.5.4
 
 ### 适配
 
-* 主页动态页更新。
+- 主页动态页更新。
 
 ## v1.5.3
 
 ### 优化
 
-* 移除 Hook XHR 的临时方案，B 站已修复相关问题。
+- 移除 Hook XHR 的临时方案，B 站已修复相关问题。
 
 ## v1.5.0
 
 ### 重构
 
-* 重写 Hook XHR，移除对外部依赖的需求。
+- 重写 Hook XHR，移除对外部依赖的需求。
 
 ### 适配
 
-* 番剧页面更新。
+- 番剧页面更新。
 
 ## v1.4.8
 
 ### 临时
 
-* 通过 Hook XHR 解决旧版请求未携带 Cookie 的问题。
+- 通过 Hook XHR 解决旧版请求未携带 Cookie 的问题。
 
 ### 优化
 
-* 调整动态页的 URL 匹配逻辑。
+- 调整动态页的 URL 匹配逻辑。
 
 ## v1.4.7
 
 ### 适配
 
-* 课程页面。
+- 课程页面。
 
 ## v1.4.6
 
 ### 修复
 
-* 修复动态主页 URL 匹配 `?` 结尾的错误。
+- 修复动态主页 URL 匹配 `?` 结尾的错误。
 
 ## v1.4.4
 
 ### 修复
 
-* 修复 Safari 浏览器中新旧版逻辑检查的问题。
+- 修复 Safari 浏览器中新旧版逻辑检查的问题。
 
 ## v1.4.3
 
 ### 适配
 
-* 话题页、新版动态页以及单独动态页。
+- 话题页、新版动态页以及单独动态页。
 
 ## v1.4.2
 
 ### 适配
 
-* 新版单独动态页。
+- 新版单独动态页。
 
 ## v1.4.1
 
 ### 修复
 
-* 使用 `unsafeWindow` 方式正确访问 `window.bbComment` 以完成注入。
+- 使用 `unsafeWindow` 方式正确访问 `window.bbComment` 以完成注入。
 
 ## v1.4.0
 
 ### 优化
 
-* 项目迁移至 `vite-plugin-monkey`。
+- 项目迁移至 `vite-plugin-monkey`。
 
 ---
 
@@ -260,11 +256,11 @@
 
 ### 适配
 
-* 视频。
-* 番剧。
-* 播放列表。
-* 主页动态。
+- 视频。
+- 番剧。
+- 播放列表。
+- 主页动态。
 
 ### 修复
 
-* 修复动态 IP 逻辑错误
+- 修复动态 IP 逻辑错误

@@ -1,28 +1,28 @@
 declare global {
-    interface Window {
-        bbComment?: bbComment
-    }
+  interface Window {
+    bbComment?: bbComment
+  }
 }
 
 export interface ReplyElement extends HTMLDivElement {
-    __vue__: {
-        vnode: {
-            props: {
-                reply: Reply
-            }
-        }
+  __vue__: {
+    vnode: {
+      props: {
+        reply: Reply
+      }
     }
+  }
 }
 
 export interface SubReplyElement extends HTMLDivElement {
-    __vue__: {
-        vnode: {
-            props: {
-                subReply: Reply
-                rootReply: Reply
-            }
-        }
+  __vue__: {
+    vnode: {
+      props: {
+        subReply: Reply
+        rootReply: Reply
+      }
     }
+  }
 }
 
 export type CreateListCon = (item: Reply, i: number, pos: number) => string
@@ -30,307 +30,307 @@ export type CreateListCon = (item: Reply, i: number, pos: number) => string
 export type CreateSubReplyItem = (item: Reply, i: number) => string
 
 export interface bbComment {
-    prototype: {
-        _createListCon: CreateListCon
-        _createSubReplyItem: CreateSubReplyItem
-    }
+  prototype: {
+    _createListCon: CreateListCon
+    _createSubReplyItem: CreateSubReplyItem
+  }
 }
 
 export interface Reply {
-    rpid: number
-    oid: number
-    type: number
-    mid: number
-    root: number
-    parent: number
-    dialog: number
-    count: number
-    rcount: number
-    state: number
-    fansgrade: number
-    attr: number
-    ctime: number
-    rpid_str: string
-    root_str: string
-    parent_str: string
-    like: number
-    action: number
-    member: Member
-    content: Content
-    replies: Reply[] | null
-    assist: number
-    up_action: UpAction
-    invisible: boolean
-    reply_control: ReplyControl
-    folder: Folder
-    dynamic_id_str: string
+  rpid: number
+  oid: number
+  type: number
+  mid: number
+  root: number
+  parent: number
+  dialog: number
+  count: number
+  rcount: number
+  state: number
+  fansgrade: number
+  attr: number
+  ctime: number
+  rpid_str: string
+  root_str: string
+  parent_str: string
+  like: number
+  action: number
+  member: Member
+  content: Content
+  replies: Reply[] | null
+  assist: number
+  up_action: UpAction
+  invisible: boolean
+  reply_control: ReplyControl
+  folder: Folder
+  dynamic_id_str: string
 }
 
 export interface ReplyAPIData {
-    code: number
-    data: {
-        top?: {
-            admin: string | null
-            upper: Reply | null
-            vote: string | null
-        }
-        top_replies?: Reply[]
-        replies: Reply[]
+  code: number
+  data: {
+    top?: {
+      admin: string | null
+      upper: Reply | null
+      vote: string | null
     }
-    message: string
-    ttl: number
+    top_replies?: Reply[]
+    replies: Reply[]
+  }
+  message: string
+  ttl: number
 }
 
 interface Content {
-    message: string
-    members: any[]
-    jump_url: JumpURL
-    max_line: number
+  message: string
+  members: any[]
+  jump_url: JumpURL
+  max_line: number
 }
 
 type JumpURL = { [k: string]: never }
 
 interface Folder {
-    has_folded: boolean
-    is_folded: boolean
-    rule: string
+  has_folded: boolean
+  is_folded: boolean
+  rule: string
 }
 
 interface Member {
-    mid: string
-    uname: string
-    sex: string
-    sign: string
-    avatar: string
-    rank: string
-    face_nft_new: number
-    is_senior_member: number
-    senior: JumpURL
-    level_info: LevelInfo
-    pendant: Pendant
-    nameplate: Nameplate
-    official_verify: OfficialVerify
-    vip: Vip
-    fans_detail: null
-    user_sailing: UserSailing
-    is_contractor: boolean
-    contract_desc: string
-    nft_interaction: null
-    avatar_item: AvatarItem
+  mid: string
+  uname: string
+  sex: string
+  sign: string
+  avatar: string
+  rank: string
+  face_nft_new: number
+  is_senior_member: number
+  senior: JumpURL
+  level_info: LevelInfo
+  pendant: Pendant
+  nameplate: Nameplate
+  official_verify: OfficialVerify
+  vip: Vip
+  fans_detail: null
+  user_sailing: UserSailing
+  is_contractor: boolean
+  contract_desc: string
+  nft_interaction: null
+  avatar_item: AvatarItem
 }
 
 interface AvatarItem {
-    container_size: ContainerSize
-    fallback_layers: FallbackLayers
-    mid: string
+  container_size: ContainerSize
+  fallback_layers: FallbackLayers
+  mid: string
 }
 
 interface ContainerSize {
-    width: number
-    height: number
+  width: number
+  height: number
 }
 
 interface FallbackLayers {
-    layers: Layer[]
-    is_critical_group: boolean
+  layers: Layer[]
+  is_critical_group: boolean
 }
 
 interface Layer {
-    visible: boolean
-    general_spec: GeneralSpec
-    layer_config: LayerConfig
-    resource: Resource
+  visible: boolean
+  general_spec: GeneralSpec
+  layer_config: LayerConfig
+  resource: Resource
 }
 
 interface GeneralSpec {
-    pos_spec: PosSpec
-    size_spec: ContainerSize
-    render_spec: RenderSpec
+  pos_spec: PosSpec
+  size_spec: ContainerSize
+  render_spec: RenderSpec
 }
 
 interface PosSpec {
-    coordinate_pos: number
-    axis_x: number
-    axis_y: number
+  coordinate_pos: number
+  axis_x: number
+  axis_y: number
 }
 
 interface RenderSpec {
-    opacity: number
+  opacity: number
 }
 
 interface LayerConfig {
-    tags: Tags
-    is_critical: boolean
-    layer_mask: LayerMask
+  tags: Tags
+  is_critical: boolean
+  layer_mask: LayerMask
 }
 
 interface LayerMask {
-    general_spec: GeneralSpec
-    mask_src: MaskSrc
+  general_spec: GeneralSpec
+  mask_src: MaskSrc
 }
 
 interface MaskSrc {
-    src_type: number
-    draw: Draw
+  src_type: number
+  draw: Draw
 }
 
 interface Draw {
-    draw_type: number
-    fill_mode: number
-    color_config: ColorConfig
+  draw_type: number
+  fill_mode: number
+  color_config: ColorConfig
 }
 
 interface ColorConfig {
-    day: Day
+  day: Day
 }
 
 interface Day {
-    argb: string
+  argb: string
 }
 
 interface Tags {
-    AVATAR_LAYER: JumpURL
+  AVATAR_LAYER: JumpURL
 }
 
 interface Resource {
-    res_type: number
-    res_image: ResImage
+  res_type: number
+  res_image: ResImage
 }
 
 interface ResImage {
-    image_src: ImageSrc
+  image_src: ImageSrc
 }
 
 interface ImageSrc {
-    src_type: number
-    placeholder: number
-    remote: Remote
+  src_type: number
+  placeholder: number
+  remote: Remote
 }
 
 interface Remote {
-    url: string
-    bfs_style: string
+  url: string
+  bfs_style: string
 }
 
 interface LevelInfo {
-    current_level: number
-    current_min: number
-    current_exp: number
-    next_exp: number
+  current_level: number
+  current_min: number
+  current_exp: number
+  next_exp: number
 }
 
 interface Nameplate {
-    nid: number
-    name: string
-    image: string
-    image_small: string
-    level: string
-    condition: string
+  nid: number
+  name: string
+  image: string
+  image_small: string
+  level: string
+  condition: string
 }
 
 interface OfficialVerify {
-    type: number
-    desc: string
+  type: number
+  desc: string
 }
 
 interface Pendant {
-    pid: number
-    name: string
-    image: string
-    expire: number
-    image_enhance: string
-    image_enhance_frame: string
+  pid: number
+  name: string
+  image: string
+  expire: number
+  image_enhance: string
+  image_enhance_frame: string
 }
 
 interface UserSailing {
-    pendant: null
-    cardbg: null
-    cardbg_with_focus: null
+  pendant: null
+  cardbg: null
+  cardbg_with_focus: null
 }
 
 interface Vip {
-    vipType: number
-    vipDueDate: number
-    dueRemark: string
-    accessStatus: number
-    vipStatus: number
-    vipStatusWarn: string
-    themeType: number
-    label: Label
-    avatar_subscript: number
-    nickname_color: string
+  vipType: number
+  vipDueDate: number
+  dueRemark: string
+  accessStatus: number
+  vipStatus: number
+  vipStatusWarn: string
+  themeType: number
+  label: Label
+  avatar_subscript: number
+  nickname_color: string
 }
 
 interface Label {
-    path: string
-    text: string
-    label_theme: string
-    text_color: string
-    bg_style: number
-    bg_color: string
-    border_color: string
-    use_img_label: boolean
-    img_label_uri_hans: string
-    img_label_uri_hant: string
-    img_label_uri_hans_static: string
-    img_label_uri_hant_static: string
+  path: string
+  text: string
+  label_theme: string
+  text_color: string
+  bg_style: number
+  bg_color: string
+  border_color: string
+  use_img_label: boolean
+  img_label_uri_hans: string
+  img_label_uri_hant: string
+  img_label_uri_hans_static: string
+  img_label_uri_hant_static: string
 }
 
 interface ReplyControl {
-    is_up_top: boolean
-    max_line: number
-    sub_reply_entry_text: string
-    sub_reply_title_text: string
-    time_desc: string
-    location?: string
-    up_reply: boolean
+  is_up_top: boolean
+  max_line: number
+  sub_reply_entry_text: string
+  sub_reply_title_text: string
+  time_desc: string
+  location?: string
+  up_reply: boolean
 }
 
 interface UpAction {
-    like: boolean
-    reply: boolean
+  like: boolean
+  reply: boolean
 }
 
 export interface ReadViewInfo {
-    total: number
-    like: number
-    attention: boolean
-    favorite: boolean
-    coin: number
-    stats: Stats
-    title: string
-    banner_url: string
-    mid: number
-    author_name: string
-    is_author: boolean
-    image_urls: string[]
-    origin_image_urls: string[]
-    shareable: boolean
-    show_later_watch: boolean
-    show_small_window: boolean
-    in_list: boolean
-    pre: number
-    next: number
-    share_channels: ShareChannel[]
-    type: number
-    video_url: string
-    location: string
-    disable_share: boolean
+  total: number
+  like: number
+  attention: boolean
+  favorite: boolean
+  coin: number
+  stats: Stats
+  title: string
+  banner_url: string
+  mid: number
+  author_name: string
+  is_author: boolean
+  image_urls: string[]
+  origin_image_urls: string[]
+  shareable: boolean
+  show_later_watch: boolean
+  show_small_window: boolean
+  in_list: boolean
+  pre: number
+  next: number
+  share_channels: ShareChannel[]
+  type: number
+  video_url: string
+  location: string
+  disable_share: boolean
 }
 
 interface ShareChannel {
-    name: string
-    picture: string
-    share_channel: string
+  name: string
+  picture: string
+  share_channel: string
 }
 
 interface Stats {
-    view: number
-    favorite: number
-    like: number
-    dislike: number
-    reply: number
-    share: number
-    coin: number
-    dynamic: number
+  view: number
+  favorite: number
+  like: number
+  dislike: number
+  reply: number
+  share: number
+  coin: number
+  dynamic: number
 }

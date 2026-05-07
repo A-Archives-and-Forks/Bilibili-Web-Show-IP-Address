@@ -1,7 +1,7 @@
 name: 功能请求
 description: 请求新增适配网址、或具体的功能
 title: '[Feature Request]: '
-labels: ["enhancement"]
+labels: ['enhancement']
 body:
   - type: markdown
     attributes:
