@@ -12,7 +12,6 @@ export const registerRoutes = (router: Router) => {
     [
       /** 视频 */ 'https://www.bilibili.com/video/',
       /** 新列表 */ 'https://www.bilibili.com/list/',
-      /** 新版单独动态页、专栏页 */ 'https://www.bilibili.com/opus/',
       /** 新番剧播放页 */ 'https://www.bilibili.com/bangumi/play/',
       /** 课程页 */ 'https://www.bilibili.com/cheese/play/',
       /** 话题页 */ 'https://www.bilibili.com/v/topic/detail',
@@ -33,7 +32,13 @@ export const registerRoutes = (router: Router) => {
     observeAndInjectComments()
   })
 
-  router.serve(/** 专栏 */ 'https://www.bilibili.com/read/', handleReadRoute)
+  router.serve(
+    [
+      /** 专栏页（cv） */ 'https://www.bilibili.com/read/',
+      /** 单独动态页、专栏页（共用 opus，但内部处理不一样） */ 'https://www.bilibili.com/opus/',
+    ],
+    handleReadRoute,
+  )
 
   /**
    * 个人空间动态页

@@ -5,7 +5,7 @@ import { defineTestSuite } from './utils'
 defineTestSuite('Lit Component', LitComponentAdapter, [
   { name: '视频', url: 'https://www.bilibili.com/video/BV1tx411w7Ay' },
   { name: '新列表', url: 'https://www.bilibili.com/list/8047632' },
-  { name: '新版单独动态页、专栏页', url: 'https://www.bilibili.com/opus/1108038404888592390' },
+  { name: '新版单独动态页', url: 'https://www.bilibili.com/opus/1108038404888592390' },
   { name: '新番剧播放页', url: 'https://www.bilibili.com/bangumi/play/ss29325' },
   {
     name: '课程页',
@@ -30,12 +30,21 @@ defineTestSuite('Lit Component', LitComponentAdapter, [
     url: 'https://www.bilibili.com/festival/bnj2026',
   },
   {
-    name: '专栏',
-    url: 'https://www.bilibili.com/read/cv26498166',
+    name: '专栏（opus）',
+    url: 'https://www.bilibili.com/opus/840727281150197760',
+    verify: async (page) => {
+      const readInfo = page.locator('.opus-module-author__pub__bilireveal')
+      await expect(readInfo).toContainText('上海', { timeout: 10000 })
+    },
+  },
+  {
+    name: '专栏（cv）',
+    url: 'https://www.bilibili.com/read/cv26498166/?opus_fallback=1',
     verify: async (page) => {
       const readInfo = page.locator('.article-read-info')
       await expect(readInfo).toContainText('上海', { timeout: 10000 })
     },
+    refresh: true,
   },
   {
     name: '个人空间（首页->动态页)',

@@ -1,26 +1,79 @@
 import { isElementLoaded } from '@/utils'
-import type { ReadViewInfo } from './types'
+import type { InitialState, ReadViewInfo } from './types'
+import { unsafeWindow } from '$'
 
-export const injectArticleLocation = async (url: string) => {
-  const cv = url.split('/').filter(Boolean).pop()?.replace('cv', '')
-  if (!cv) return
+declare global {
+  interface Window {
+    __INITIAL_STATE__?: InitialState
+  }
+}
 
+const fetchArticleViewInfo = async (cv: string | number): Promise<ReadViewInfo | undefined> => {
   try {
-    const { data: viewinfo }: { data: ReadViewInfo } = await fetch(
-      `https://api.bilibili.com/x/article/viewinfo?id=${cv}`,
-      { credentials: 'include' },
-    ).then((res) => res.json())
-
-    if (!viewinfo?.location) return
-
-    const articleDetail = await isElementLoaded('.article-detail')
-    const publishText = articleDetail?.querySelector('.publish-text')
-    if (!publishText) return
-
-    const locationEl = document.createElement('span')
-    locationEl.textContent = `${viewinfo.location} · `
-    publishText.insertAdjacentElement('afterend', locationEl)
+    const response = await fetch(`https://api.bilibili.com/x/article/viewinfo?id=${cv}`, {
+      credentials: 'include',
+    })
+    const { data } = await response.json()
+    return data
   } catch (error) {
     console.error('获取文章 IP 属地失败：', error)
+    return undefined
   }
+}
+
+const serveNewOpusArticle = async (initialState?: InitialState) => {
+  const basic = initialState?.detail?.basic
+  if (!basic?.rid_str || basic.article_type !== 0) return
+
+  const viewinfo = await fetchArticleViewInfo(basic.rid_str)
+  if (!viewinfo?.location) return
+
+  const authorPub = await isElementLoaded('.opus-module-author__pub')
+  if (!authorPub) return
+
+  if (authorPub.querySelector('.opus-module-author__pub__bilireveal')) return
+
+  const locationEl = document.createElement('span')
+  locationEl.innerHTML = `${viewinfo.location} &middot;&nbsp;`
+  locationEl.className = 'opus-module-author__pub__bilireveal'
+  authorPub.insertAdjacentElement('afterbegin', locationEl)
+}
+
+export const injectArticleLocation = async (url: string) => {
+  const match = url.match(/\/cv(\d+)/)
+  const cv = match ? match[1] : undefined
+
+  if (!cv) {
+    // 新版专栏文章（opus）
+    if (unsafeWindow.__INITIAL_STATE__) {
+      serveNewOpusArticle(unsafeWindow.__INITIAL_STATE__)
+      return
+    }
+
+    let initialState: InitialState | undefined
+    Object.defineProperty(unsafeWindow, '__INITIAL_STATE__', {
+      get: () => initialState,
+      set: (value: InitialState) => {
+        initialState = value
+        serveNewOpusArticle(initialState)
+      },
+      configurable: true,
+    })
+    return
+  }
+
+  // 普通专栏文章处理逻辑
+  const viewinfo = await fetchArticleViewInfo(cv)
+  if (!viewinfo?.location) return
+
+  const articleDetail = await isElementLoaded('.article-detail')
+  const publishText = articleDetail?.querySelector('.publish-text')
+  if (!publishText) return
+
+  if (publishText.parentElement?.querySelector('.article-location-bilireveal')) return
+
+  const locationEl = document.createElement('span')
+  locationEl.textContent = `${viewinfo.location} · `
+  locationEl.className = 'article-location-bilireveal'
+  publishText.insertAdjacentElement('afterend', locationEl)
 }

@@ -9,6 +9,10 @@ const randomDelay = (min = 800, max = 4000) => {
 interface TestCase {
   name: string
   url: string
+  /**
+   * 是否需要在初始加载后刷新页面
+   */
+  refresh?: boolean
   setup?: (page: Page) => Promise<void> | void
   verify?: (page: Page) => Promise<void> | void
 }
@@ -28,10 +32,16 @@ export function defineTestSuite(
       await randomDelay()
     })
 
-    for (const { name, url, setup, verify } of cases) {
+    for (const { name, url, refresh, setup, verify } of cases) {
       test(name, async ({ page }) => {
         const adapter = new Adapter(page)
         await page.goto(url)
+
+        // 判断并执行刷新逻辑
+        if (refresh) {
+          // goto 默认会等待 load 事件，所以这里直接 reload 是安全的
+          await page.reload()
+        }
 
         if (setup) {
           await setup(page)

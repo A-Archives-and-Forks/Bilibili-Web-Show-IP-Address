@@ -334,3 +334,31 @@ interface Stats {
   coin: number
   dynamic: number
 }
+
+export interface InitialState {
+  bmgDefDomain: string
+  isMac: boolean
+  modern: boolean
+  features: string[]
+  id: string
+  detail?: Detail
+  isClient: boolean
+  isPreview: boolean
+  theme: string
+  themeMode: string
+}
+
+interface Detail {
+  basic?: Basic
+  id_str: string
+  type: number
+}
+
+interface Basic {
+  article_type?: number
+  comment_id_str: string
+  comment_type: number
+  rid_str: string
+  title: string
+  uid: number
+}
