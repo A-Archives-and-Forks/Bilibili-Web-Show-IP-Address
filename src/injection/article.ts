@@ -22,6 +22,7 @@ const fetchArticleViewInfo = async (cv: string | number): Promise<ReadViewInfo |
 }
 
 const serveNewOpusArticle = async (initialState?: InitialState) => {
+  // 没有这些参数说明不是专栏文章的 opus
   const basic = initialState?.detail?.basic
   if (!basic?.rid_str || basic.article_type !== 0) return
 

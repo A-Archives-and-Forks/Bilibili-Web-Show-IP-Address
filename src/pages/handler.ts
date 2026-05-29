@@ -1,7 +1,7 @@
 import { hookBBComment, hookLit, injectArticleLocation } from '@/injection'
 import { isElementLoaded } from '@/utils/'
 
-export const handleReadRoute = async (url: string) => {
+export const handleOpusRoute = async (url: string) => {
   hookLit()
   injectArticleLocation(url)
 }

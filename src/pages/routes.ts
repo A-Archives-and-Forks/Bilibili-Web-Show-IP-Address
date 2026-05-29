@@ -3,7 +3,7 @@ import type { Router } from '@/utils/'
 import {
   handleDynamicHomeRoute,
   handleDynamicItemRoute,
-  handleReadRoute,
+  handleOpusRoute,
   handleSpaceHomeRoute,
 } from './handler'
 
@@ -37,7 +37,7 @@ export const registerRoutes = (router: Router) => {
       /** 专栏页（cv） */ 'https://www.bilibili.com/read/',
       /** 单独动态页、专栏页（共用 opus，但内部处理不一样） */ 'https://www.bilibili.com/opus/',
     ],
-    handleReadRoute,
+    handleOpusRoute,
   )
 
   /**
